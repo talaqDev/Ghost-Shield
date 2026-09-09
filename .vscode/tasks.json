@@ -1,0 +1,13 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Backend tests",
+			"type": "shell",
+			"command": "cd backend && PYTHONPATH=. /usr/local/bin/python3 -m pytest -q",
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "test"
+		}
+	]
+}
