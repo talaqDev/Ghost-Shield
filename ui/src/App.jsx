@@ -13,6 +13,7 @@ import {
   Upload,
 } from "lucide-react";
 import Header from "./components/Header";
+import AuditWorkbench from "./components/AuditWorkbench";
 
 const tabs = [
   { id: "audit", label: "Audit Workbench", icon: ScanSearch },
@@ -87,13 +88,13 @@ function App() {
               </button>
             ))}
           </nav>
-          <div className="grid gap-8 p-6 lg:grid-cols-[1.25fr_.75fr] lg:p-8">
+          {activeTab === "audit" ? <div className="p-6 lg:p-8"><AuditWorkbench /></div> : <div className="grid gap-8 p-6 lg:grid-cols-[1.25fr_.75fr] lg:p-8">
             <div>
               <div className="mb-7 flex items-center gap-3"><div className="grid size-10 place-items-center rounded-xl bg-emerald-300/10 text-emerald-300"><CurrentIcon size={19} /></div><div><h2 className="text-xl font-semibold text-white">{currentTab.label}</h2><p className="font-mono text-[10px] uppercase tracking-[0.14em] text-slate-500">Workspace module · ready</p></div></div>
               <div className="rounded-xl border border-dashed border-white/12 bg-black/10 p-8"><div className="mb-4 flex items-center gap-2 text-slate-400"><SlidersHorizontal size={18} /><span className="text-sm font-medium">Module workspace</span></div><p className="max-w-lg text-sm leading-6 text-slate-500">This module is connected to the Ghost Shield API foundation. The interactive controls for document upload, vector selection, attack execution, and report export land here next.</p><div className="mt-6 flex flex-wrap gap-2"><span className="rounded-md border border-emerald-300/15 bg-emerald-300/5 px-2.5 py-1.5 font-mono text-[10px] text-emerald-300">LOCAL-FIRST</span><span className="rounded-md border border-white/10 px-2.5 py-1.5 font-mono text-[10px] text-slate-500">ASYNC API</span></div></div>
             </div>
             <aside className="rounded-xl border border-white/8 bg-black/15 p-5"><div className="mb-6 flex items-center justify-between"><span className="font-mono text-[10px] uppercase tracking-[0.16em] text-slate-500">System posture</span><FileCheck2 size={17} className="text-emerald-300" /></div><div className="space-y-4">{["FAISS connector", "ChromaDB connector", "DP obfuscation", "Audit reporting"].map((item) => <div key={item} className="flex items-center justify-between text-sm"><span className="text-slate-400">{item}</span><span className="flex items-center gap-2 text-xs text-emerald-300"><i className="size-1.5 rounded-full bg-emerald-300" /> Ready</span></div>)}</div></aside>
-          </div>
+          </div>}
         </section>
         <footer className="mt-8 flex flex-wrap justify-between gap-3 font-mono text-[10px] uppercase tracking-[0.16em] text-slate-600"><span>Ghost Shield / Security console</span><span>Week 3 · UI foundation</span></footer>
       </main>
