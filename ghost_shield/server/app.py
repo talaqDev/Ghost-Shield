@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from .routes import attack, audit, defense
+from .routes import attack, audit, defense, reports
 
 app = FastAPI(
     title="Ghost Shield API",
@@ -20,6 +20,7 @@ app.add_middleware(
 app.include_router(audit.router)
 app.include_router(attack.router)
 app.include_router(defense.router)
+app.include_router(reports.router)
 
 
 @app.get("/health")
