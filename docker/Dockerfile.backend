@@ -1,0 +1,24 @@
+FROM python:3.11-slim-bookworm
+
+WORKDIR /app
+
+# Install Poetry without relying on the Debian package mirror.
+RUN pip install --no-cache-dir poetry
+
+# Copy dependency definitions
+COPY pyproject.toml poetry.lock* ./
+
+# Configure poetry to not create a virtual env inside container
+RUN poetry config virtualenvs.create false \
+    && poetry install --no-interaction --no-root --without dev
+
+# Copy application source
+COPY ghost_shield/ ./ghost_shield/
+COPY README.md ./
+
+# Install the package itself
+RUN poetry install --no-interaction --without dev
+
+EXPOSE 8000
+
+CMD ["uvicorn", "ghost_shield.server.app:app", "--host", "0.0.0.0", "--port", "8000"]

@@ -2,6 +2,31 @@
 
 Ghost Shield is a research-to-product MVP for measuring embedding inversion leakage and demonstrating an epoch key rotation defense.
 
+## Day 1 foundation
+
+The repository now includes the Poetry package foundation under `ghost_shield/`, a minimal FastAPI health service, a Python 3.11 dependency manifest, a backend Docker image, Docker Compose configuration, a smoke test, and GitHub Actions CI. The earlier `backend/` and `frontend/` MVP paths remain available while the engine is migrated into the new package layout.
+
+### Poetry setup
+
+```bash
+poetry install
+poetry run pytest
+poetry run ruff check .
+```
+
+### Container setup
+
+```bash
+docker-compose up --build -d
+curl http://localhost:8000/health
+```
+
+The initial health response is:
+
+```json
+{"status": "healthy", "service": "ghost-shield", "version": "0.1.0"}
+```
+
 ## Interactive workflow
 
 The dashboard now supports the complete local workflow:
