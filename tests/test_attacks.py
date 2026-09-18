@@ -1,6 +1,6 @@
 import pytest
 
-from ghost_shield.attacks import KNNInversionAttack
+from ghost_shield.attacks import KNNInversionAttack, MLPInversionAttack
 
 
 @pytest.mark.asyncio
@@ -35,3 +35,17 @@ async def test_knn_attack_handles_empty_corpus_and_dimension_errors() -> None:
     await attack.fit(["reference text"])
     with pytest.raises(ValueError, match="Target vectors must have dimension"):
         await attack.invert([[1.0]])
+
+
+@pytest.mark.asyncio
+async def test_mlp_inversion_attack() -> None:
+    attack = MLPInversionAttack(embedding_dim=16, vocab_size=32, epochs=2)
+    await attack.fit(["red apple", "blue sky", "green garden"])
+
+    candidates = await attack.invert([attack.encode_text("red apple")], top_k=2)
+
+    assert len(candidates) == 1
+    assert len(candidates[0]) == 2
+    assert all(isinstance(token, str) for token in candidates[0])
+    assert attack.model is not None
+    assert attack.model.training is False
