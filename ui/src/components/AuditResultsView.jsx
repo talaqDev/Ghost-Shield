@@ -1,4 +1,5 @@
 import { AlertTriangle, CheckCircle, ShieldAlert } from "lucide-react";
+import RiskCharts from "./RiskCharts";
 
 const riskStyles = {
   CRITICAL: "border-rose-400/30 bg-rose-400/10 text-rose-200",
@@ -30,6 +31,7 @@ export default function AuditResultsView({ auditData }) {
         <div className="flex items-start gap-3">{retentionRisk ? <AlertTriangle className="mt-0.5 text-orange-200" size={19} /> : <CheckCircle className="mt-0.5 text-emerald-300" size={19} />}<div><h3 className="text-sm font-semibold text-white">{retentionRisk ? "Residual vectors detected after soft-delete" : "No residual vectors detected"}</h3><p className="mt-1 text-xs leading-5 text-slate-400">{retentionRisk ? "The connector hid the record from normal search, but raw vector artifacts remained available for inspection." : "The selected records were not recoverable from the connector storage layer."}</p></div></div>
       </div>
       <div className="overflow-hidden rounded-xl border border-white/8"><div className="border-b border-white/8 px-5 py-4"><h3 className="text-sm font-semibold text-white">Leakage breakdown</h3><p className="mt-1 text-xs text-slate-500">Similarity between source and reconstructed payload</p></div><div className="grid grid-cols-3 divide-x divide-white/8"><Metric label="BLEU-4" value={score(metrics?.bleu_score)} /><Metric label="ROUGE-L" value={score(metrics?.rouge_l)} /><Metric label="Cosine" value={score(metrics?.cosine_similarity)} /></div></div>
+      <RiskCharts auditData={auditData} />
     </div>
   );
 }
