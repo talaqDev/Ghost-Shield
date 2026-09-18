@@ -1,0 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Manrope", sans-serif;
+  --font-mono: "DM Mono", monospace;
+}
+
+:root { color: #e9f2ed; background: #07110f; font-synthesis: none; }
+* { box-sizing: border-box; }
+body { margin: 0; min-width: 320px; background: radial-gradient(circle at 75% -20%, rgba(24, 78, 60, .42), transparent 33%), #07110f; }
+button { cursor: pointer; }
+button:disabled { cursor: not-allowed; }
+::selection { color: #07110f; background: #a7f3d0; }

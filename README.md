@@ -27,6 +27,18 @@ The initial health response is:
 {"status": "healthy", "service": "ghost-shield", "version": "0.1.0"}
 ```
 
+## Week 3 UI foundation
+
+The new Vite + React + Tailwind dashboard lives in `ui/` and proxies `/api` requests to the FastAPI service.
+
+```bash
+cd ui
+npm install
+npm run dev
+```
+
+Open the Vite URL shown in the terminal, usually `http://localhost:5173`. Start the backend separately so the header can show the live API connection status.
+
 ## Interactive workflow
 
 The dashboard now supports the complete local workflow:
